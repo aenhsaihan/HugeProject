@@ -37,6 +37,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="previousCurrencyDecrement:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="JCp-ed-OFx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKW-UD-yLN">
                                 <rect key="frame" x="217" y="130" width="46" height="30"/>
@@ -46,6 +49,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="previousCurrencyIncrement:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FrD-8W-5nj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mA-38-NqG">
                                 <rect key="frame" x="61" y="168" width="199" height="30"/>
@@ -55,6 +61,9 @@
                                     <color key="titleColor" red="1" green="0.93101203600844729" blue="0.25893136458815369" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="previousCurrencySelector:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aWp-mI-VPN"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kz9-Hn-hvJ">
                                 <rect key="frame" x="135" y="248" width="50" height="39"/>
@@ -77,6 +86,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postCurrencyDecrement:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Hq5-H2-kwy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8W2-Qy-DID">
                                 <rect key="frame" x="217" y="364" width="46" height="30"/>
@@ -86,6 +98,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postCurrencyIncrement:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uyz-s0-Wq8"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfw-Nz-JIf">
                                 <rect key="frame" x="61" y="402" width="199" height="30"/>
@@ -95,6 +110,9 @@
                                     <color key="titleColor" red="1" green="0.93101203600000004" blue="0.25893136459999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postCurrencySelector:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1SL-2V-Es9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hag-NP-9DQ">
                                 <rect key="frame" x="130" y="476" width="60" height="30"/>
@@ -104,6 +122,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tabulateCurrencies:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AOp-xQ-feF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13672414574287772" green="0.70671172631065526" blue="1" alpha="1" colorSpace="calibratedRGB"/>

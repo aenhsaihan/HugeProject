@@ -24,4 +24,20 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *tabulateButton;
 
+
+
+- (IBAction)previousCurrencyDecrement:(id)sender;
+- (IBAction)previousCurrencyIncrement:(id)sender;
+- (IBAction)previousCurrencySelector:(id)sender;
+
+
+- (IBAction)postCurrencyDecrement:(id)sender;
+- (IBAction)postCurrencyIncrement:(id)sender;
+- (IBAction)postCurrencySelector:(id)sender;
+
+
+- (IBAction)tabulateCurrencies:(id)sender;
+
+
+
 @end

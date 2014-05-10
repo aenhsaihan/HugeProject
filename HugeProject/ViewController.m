@@ -107,7 +107,7 @@
     
     previousCurrencyTotal = [self.previousCurrencyTextField.text intValue];
     
-    [self retrieveExchangeRate];
+    [self retrieveExchangeRate:@"EUR" delegate:self callback:@selector(retrieveExchangeResult:)];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification
@@ -166,9 +166,9 @@
     
 }
 
--(void)retrieveExchangeRate
+-(void)retrieveExchangeRate:(NSString *)currency delegate:(id)delegate callback:(SEL)callback
 {
-    NSString *url = @"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDEUR%22)&format=json&env=store://datatables.org/alltableswithkeys&callback=";
+    NSString *url = [NSString stringWithFormat:@"http://query.yahooapis.com/v1/public/yql?q=select%%20*%%20from%%20yahoo.finance.xchange%%20where%%20pair%%20in%%20(%%22USD%@%%22)&format=json&env=store://datatables.org/alltableswithkeys&callback=", currency];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
@@ -188,9 +188,26 @@
         
         NSLog(@"Rate: %@", rate[@"Rate"]);
         
+        id rateObject = rate[@"Rate"];
         
+        NSDictionary *resultSet = [[NSDictionary alloc] initWithObjectsAndKeys:rateObject, currency, nil];
+        
+        [delegate performSelector:callback withObject:resultSet];
         
     }];
+    
+}
+
+-(void)retrieveExchangeResult:(id)resultDictionary
+{
+    NSString *currency = [[resultDictionary allKeys] objectAtIndex:0];
+    
+    if ([currency isEqualToString:@"EUR"]) {
+        
+        float rate = [resultDictionary[currency] floatValue];
+        
+        self.eurosNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+    }
 }
 
 @end

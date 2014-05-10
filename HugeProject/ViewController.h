@@ -21,7 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *yenNumbersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *realNumbersLabel;
 
-
+@property (nonatomic) float sterlingRate;
+@property (nonatomic) float euroRate;
+@property (nonatomic) float yenRate;
+@property (nonatomic) float realRate;
 
 
 - (IBAction)previousCurrencyDecrement:(id)sender;

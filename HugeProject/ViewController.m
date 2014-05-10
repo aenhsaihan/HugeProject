@@ -131,6 +131,8 @@
         
         
     }];
+    
+    [self retrieveExchangeRate];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification
@@ -188,6 +190,33 @@
         [self.postCurrencyTextField resignFirstResponder];
     }
     
+}
+
+-(void)retrieveExchangeRate
+{
+    NSString *url = @"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDEUR%22)&format=json&env=store://datatables.org/alltableswithkeys&callback=";
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        
+        NSLog(@"%@", dataStr);
+        
+        
+        NSError *jsonError;
+        
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        NSDictionary *query = jsonDictionary[@"query"];
+        NSDictionary *results = query[@"results"];
+        NSDictionary *rate = results[@"rate"];
+        
+        NSLog(@"Rate: %@", rate[@"Rate"]);
+        
+        
+        
+    }];
 }
 
 @end

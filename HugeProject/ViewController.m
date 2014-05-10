@@ -11,7 +11,6 @@
 @interface ViewController ()
 {
     int previousCurrencyTotal;
-    int postCurrencyTotal;
     
     UITextField *activeField;
     CGSize kbSize;
@@ -31,11 +30,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
     
     previousCurrencyTotal = 1;
-    postCurrencyTotal = 0;
     
     
     self.previousCurrencyTextField.delegate = self;
-    self.postCurrencyTextField.delegate = self;
     
     self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", previousCurrencyTotal];
 }
@@ -67,31 +64,7 @@
 - (IBAction)previousCurrencySelector:(id)sender {
 }
 
-- (IBAction)postCurrencyDecrement:(id)sender {
-    
-    if (postCurrencyTotal == 0) {
-        return;
-    }
-    
-    self.postCurrencyTextField.text = [NSString stringWithFormat:@"%d", --postCurrencyTotal];
-    
-    NSLog(@"postCurrencyTotal: %d", postCurrencyTotal);
-    
-}
 
-- (IBAction)postCurrencyIncrement:(id)sender {
-    
-    self.postCurrencyTextField.text = [NSString stringWithFormat:@"%d", ++postCurrencyTotal];
-    
-    NSLog(@"postCurrencyTotal: %d", postCurrencyTotal);
-    
-}
-
-- (IBAction)postCurrencySelector:(id)sender {
-}
-
-- (IBAction)tabulateCurrencies:(id)sender {
-}
 
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
@@ -131,6 +104,8 @@
         
         
     }];
+    
+    previousCurrencyTotal = [self.previousCurrencyTextField.text intValue];
     
     [self retrieveExchangeRate];
 }
@@ -187,7 +162,6 @@
     UITouch *touch = [touches anyObject];
     if (touch.phase == UITouchPhaseBegan) {
         [self.previousCurrencyTextField resignFirstResponder];
-        [self.postCurrencyTextField resignFirstResponder];
     }
     
 }

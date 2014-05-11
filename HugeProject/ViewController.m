@@ -15,6 +15,7 @@
     UITextField *activeField;
     CGSize kbSize;
     
+    NSArray *currencies;
 }
 
 @end
@@ -31,10 +32,17 @@
     
     previousCurrencyTotal = 1;
     
+    currencies = @[@"EUR", @"GBP", @"JPY", @"BRL"];
     
     self.previousCurrencyTextField.delegate = self;
     
     self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", previousCurrencyTotal];
+    
+    
+    [self convertAllCurrencies];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,12 +59,16 @@
     
     self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", --previousCurrencyTotal];
     
+    [self convertAllCurrencies];
+    
     NSLog(@"previousCurrencyTotal: %d", previousCurrencyTotal);
 }
 
 - (IBAction)previousCurrencyIncrement:(id)sender {
     
     self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", ++previousCurrencyTotal];
+    
+    [self convertAllCurrencies];
     
     NSLog(@"previousCurrencyTotal: %d", previousCurrencyTotal);
 }
@@ -107,7 +119,7 @@
     
     previousCurrencyTotal = [self.previousCurrencyTextField.text intValue];
     
-    [self retrieveExchangeRate:@"EUR" delegate:self callback:@selector(retrieveExchangeResult:)];
+    [self convertAllCurrencies];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification
@@ -202,12 +214,38 @@
 {
     NSString *currency = [[resultDictionary allKeys] objectAtIndex:0];
     
+    float rate = [resultDictionary[currency] floatValue];
+    
     if ([currency isEqualToString:@"EUR"]) {
         
-        float rate = [resultDictionary[currency] floatValue];
-        
         self.eurosNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        
+    } else if ([currency isEqualToString:@"GBP"]) {
+        
+        self.sterlingNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        
+    } else if ([currency isEqualToString:@"JPY"]) {
+        
+        self.yenNumbersLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        
+    } else if ([currency isEqualToString:@"BRL"]) {
+        
+        self.realNumbersLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        
+    } else {
+        
+        NSLog(@"A certain currency could not be updated");
     }
 }
+
+-(void)convertAllCurrencies
+{
+    for (NSString *currency in currencies) {
+        
+        [self retrieveExchangeRate:currency delegate:self callback:@selector(retrieveExchangeResult:)];
+        
+    }
+}
+
 
 @end

@@ -144,7 +144,7 @@
     
 }
 
--(void)performCurrencyConversion:(id)resultDictionary
+-(void)updateCurrencyLabels:(id)resultDictionary
 {
     NSString *currency = [[resultDictionary allKeys] objectAtIndex:0];
     
@@ -184,7 +184,7 @@
 {
     for (NSString *currency in currencies) {
         
-        [self retrieveExchangeRate:currency delegate:self callback:@selector(performCurrencyConversion:)];
+        [self retrieveExchangeRate:currency delegate:self callback:@selector(updateCurrencyLabels:)];
         
     }
 }

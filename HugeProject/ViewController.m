@@ -217,18 +217,26 @@
     float rate = [resultDictionary[currency] floatValue];
     
     if ([currency isEqualToString:@"EUR"]) {
+
+        [self animateScrollingForLabel:self.eurosNumberLabel];
         
         self.eurosNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
         
     } else if ([currency isEqualToString:@"GBP"]) {
         
+        [self animateScrollingForLabel:self.sterlingNumberLabel];
+        
         self.sterlingNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
         
     } else if ([currency isEqualToString:@"JPY"]) {
         
+        [self animateScrollingForLabel:self.yenNumbersLabel];
+        
         self.yenNumbersLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
         
     } else if ([currency isEqualToString:@"BRL"]) {
+        
+        [self animateScrollingForLabel:self.realNumbersLabel];
         
         self.realNumbersLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
         
@@ -245,6 +253,17 @@
         [self retrieveExchangeRate:currency delegate:self callback:@selector(retrieveExchangeResult:)];
         
     }
+}
+
+-(void)animateScrollingForLabel:(UILabel *)label
+{
+    // Add transition (must be called after myLabel has been displayed)
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.3;   //You can change this to any other duration
+    animation.type = kCATransitionMoveIn;     //I would assume this is what you want because you want to "animate up or down"
+    animation.subtype = kCATransitionFromTop; //You can change this to kCATransitionFromBottom, kCATransitionFromLeft, or kCATransitionFromRight
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [label.layer addAnimation:animation forKey:@"changeTextTransition"];
 }
 
 

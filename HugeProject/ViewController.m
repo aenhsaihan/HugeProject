@@ -10,7 +10,7 @@
 
 @interface ViewController ()
 {
-    int previousCurrencyTotal;
+    int dollarTotal;
     
     UITextField *activeField;
     CGSize kbSize;
@@ -27,19 +27,20 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    previousCurrencyTotal = 1;
+    //Initialize the amount to be converted with one dollar
+    dollarTotal = 1;
     
+    
+    //You can manage the different currencies here
     currencies = @[@"EUR", @"GBP", @"JPY", @"BRL"];
     
-    self.previousCurrencyTextField.delegate = self;
     
-    self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", previousCurrencyTotal];
+    self.userInputTextField.delegate = self;
+    self.userInputTextField.text = [NSString stringWithFormat:@"%d", dollarTotal];
     
     
     [self convertAllCurrencies];
-    
-    
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,37 +51,35 @@
 
 - (IBAction)previousCurrencyDecrement:(id)sender {
     
-    if (previousCurrencyTotal == 0) {
+    if (dollarTotal == 0) {
         return;
     }
     
-    self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", --previousCurrencyTotal];
+    self.userInputTextField.text = [NSString stringWithFormat:@"%d", --dollarTotal];
     
     [self convertAllCurrencies];
     
-    NSLog(@"previousCurrencyTotal: %d", previousCurrencyTotal);
 }
 
 - (IBAction)previousCurrencyIncrement:(id)sender {
     
-    self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", ++previousCurrencyTotal];
+    self.userInputTextField.text = [NSString stringWithFormat:@"%d", ++dollarTotal];
     
     [self convertAllCurrencies];
     
-    NSLog(@"previousCurrencyTotal: %d", previousCurrencyTotal);
 }
 
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if ([self.previousCurrencyTextField.text intValue] < 0) {
+    if ([self.userInputTextField.text intValue] < 0) {
         
-        self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", previousCurrencyTotal];
+        self.userInputTextField.text = [NSString stringWithFormat:@"%d", dollarTotal];
         return;
         
     }
     
-    previousCurrencyTotal = [self.previousCurrencyTextField.text intValue];
+    dollarTotal = [self.userInputTextField.text intValue];
     
     [self convertAllCurrencies];
 }
@@ -90,7 +89,7 @@
 {
     UITouch *touch = [touches anyObject];
     if (touch.phase == UITouchPhaseBegan) {
-        [self.previousCurrencyTextField resignFirstResponder];
+        [self.userInputTextField resignFirstResponder];
     }
     
 }
@@ -103,23 +102,41 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
-        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         
-        NSLog(@"%@", dataStr);
+        //Uncomment the following two lines if you would like to see the JSON string.
+        //NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        //NSLog(@"%@", dataStr);
+        
+        if (connectionError) {
+            
+            NSLog(@"%@", [connectionError localizedDescription]);
+            return;
+            
+        }
         
         
         NSError *jsonError;
         
         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        
+        if (jsonError) {
+            
+            NSLog(@"%@", [jsonError localizedDescription]);
+            return;
+        }
+        
+        //Drilling down into the JSON string to get our rate
+        
         NSDictionary *query = jsonDictionary[@"query"];
         NSDictionary *results = query[@"results"];
         NSDictionary *rate = results[@"rate"];
         
-        NSLog(@"Rate: %@", rate[@"Rate"]);
+        
         
         id rateObject = rate[@"Rate"];
-        
         NSDictionary *resultSet = [[NSDictionary alloc] initWithObjectsAndKeys:rateObject, currency, nil];
+        
+        //We've got our rate, now perform conversion...
         
         [delegate performSelector:callback withObject:resultSet];
         
@@ -127,7 +144,7 @@
     
 }
 
--(void)retrieveExchangeResult:(id)resultDictionary
+-(void)performCurrencyConversion:(id)resultDictionary
 {
     NSString *currency = [[resultDictionary allKeys] objectAtIndex:0];
     
@@ -137,25 +154,25 @@
 
         [self animateScrollingForLabel:self.eurosNumberLabel];
         
-        self.eurosNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        self.eurosNumberLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
         
     } else if ([currency isEqualToString:@"GBP"]) {
         
         [self animateScrollingForLabel:self.sterlingNumberLabel];
         
-        self.sterlingNumberLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        self.sterlingNumberLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
         
     } else if ([currency isEqualToString:@"JPY"]) {
         
         [self animateScrollingForLabel:self.yenNumbersLabel];
         
-        self.yenNumbersLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        self.yenNumbersLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
         
     } else if ([currency isEqualToString:@"BRL"]) {
         
         [self animateScrollingForLabel:self.realNumbersLabel];
         
-        self.realNumbersLabel.text = [NSString stringWithFormat:@"%.02f", previousCurrencyTotal * rate];
+        self.realNumbersLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
         
     } else {
         
@@ -167,7 +184,7 @@
 {
     for (NSString *currency in currencies) {
         
-        [self retrieveExchangeRate:currency delegate:self callback:@selector(retrieveExchangeResult:)];
+        [self retrieveExchangeRate:currency delegate:self callback:@selector(performCurrencyConversion:)];
         
     }
 }

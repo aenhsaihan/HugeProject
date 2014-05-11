@@ -11,7 +11,7 @@
 
 @interface ViewController : UIViewController <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *previousCurrencyTextField;
+@property (weak, nonatomic) IBOutlet UITextField *userInputTextField;
 @property (weak, nonatomic) IBOutlet UIButton *previousCurrencyDecrementer;
 @property (weak, nonatomic) IBOutlet UIButton *previousCurrencyIncrementer;
 

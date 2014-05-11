@@ -27,9 +27,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     previousCurrencyTotal = 1;
     
     currencies = @[@"EUR", @"GBP", @"JPY", @"BRL"];
@@ -73,101 +70,21 @@
     NSLog(@"previousCurrencyTotal: %d", previousCurrencyTotal);
 }
 
-- (IBAction)previousCurrencySelector:(id)sender {
-}
-
-
-
-
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    float inputHeight = textField.frame.origin.y + textField.frame.size.height;
-    
-    if (inputHeight > (self.view.frame.size.height - kbSize.height)) {
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            
-            CGRect frame;
-            
-            // move our subView to its new position
-            frame = self.view.frame;
-            
-            //the +5 is added to provide a little buffer between the subview and the top of the keyboard
-            
-            frame.origin.y = -(inputHeight - (self.view.frame.size.height - kbSize.height) + 5);
-            
-            self.view.frame=frame;
-            
-        }];
-        
-    }
-}
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [UIView animateWithDuration:0.3 animations:^{
+    if ([self.previousCurrencyTextField.text intValue] < 0) {
         
-        CGRect frame;
+        self.previousCurrencyTextField.text = [NSString stringWithFormat:@"%d", previousCurrencyTotal];
+        return;
         
-        // move our subView to its new position
-        frame=self.view.frame;
-        frame.origin.y=0;
-        self.view.frame=frame;
-        
-        
-    }];
+    }
     
     previousCurrencyTotal = [self.previousCurrencyTextField.text intValue];
     
     [self convertAllCurrencies];
 }
 
-- (void)keyboardDidShow:(NSNotification *)notification
-{
-    
-    NSDictionary *info = [notification userInfo];
-    
-    kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        
-//        CGRect frame;
-//        
-//        // move our subView to its new position
-//        frame = self.view.frame;
-//        
-//        if (activeField == self.postCurrencyTextField) {
-//            
-//            frame.origin.y = -(activeField.frame.origin.y - kbSize.height);
-//            
-//        } else {
-//            
-//            return;
-//            
-//        }
-//        
-//        
-//        self.view.frame = frame;
-//        
-//        
-//    }];
-    
-}
-
--(void)keyboardDidHide:(NSNotification *)notification
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        CGRect frame;
-        
-        // move our subView to its new position
-        frame=self.view.frame;
-        frame.origin.y = 0;
-        self.view.frame = frame;
-        
-        
-    }];
-}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -242,7 +159,7 @@
         
     } else {
         
-        NSLog(@"A certain currency could not be updated");
+        NSLog(@"Error: A certain currency could not be updated: %@", currency);
     }
 }
 

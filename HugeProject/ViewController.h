@@ -12,8 +12,8 @@
 @interface ViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *userInputTextField;
-@property (weak, nonatomic) IBOutlet UIButton *previousCurrencyDecrementer;
-@property (weak, nonatomic) IBOutlet UIButton *previousCurrencyIncrementer;
+@property (weak, nonatomic) IBOutlet UIButton *currencyDecrementer;
+@property (weak, nonatomic) IBOutlet UIButton *currencyIncrementer;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *sterlingNumberLabel;
@@ -25,6 +25,8 @@
 @property (nonatomic) float euroRate;
 @property (nonatomic) float yenRate;
 @property (nonatomic) float realRate;
+
+@property (nonatomic) int dollarsTotal;
 
 
 - (IBAction)previousCurrencyDecrement:(id)sender;

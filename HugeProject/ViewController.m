@@ -10,7 +10,6 @@
 
 @interface ViewController ()
 {
-    int dollarTotal;
     
     UITextField *activeField;
     CGSize kbSize;
@@ -28,7 +27,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     //Initialize the amount to be converted with one dollar
-    dollarTotal = 1;
+    _dollarsTotal = 1;
     
     
     //You can manage the different currencies here
@@ -36,7 +35,7 @@
     
     
     self.userInputTextField.delegate = self;
-    self.userInputTextField.text = [NSString stringWithFormat:@"%d", dollarTotal];
+    self.userInputTextField.text = [NSString stringWithFormat:@"%d", _dollarsTotal];
     
     
     [self convertAllCurrencies];
@@ -51,11 +50,11 @@
 
 - (IBAction)previousCurrencyDecrement:(id)sender {
     
-    if (dollarTotal == 0) {
+    if (_dollarsTotal == 0) {
         return;
     }
     
-    self.userInputTextField.text = [NSString stringWithFormat:@"%d", --dollarTotal];
+    self.userInputTextField.text = [NSString stringWithFormat:@"%d", --_dollarsTotal];
     
     [self convertAllCurrencies];
     
@@ -63,7 +62,7 @@
 
 - (IBAction)previousCurrencyIncrement:(id)sender {
     
-    self.userInputTextField.text = [NSString stringWithFormat:@"%d", ++dollarTotal];
+    self.userInputTextField.text = [NSString stringWithFormat:@"%d", ++_dollarsTotal];
     
     [self convertAllCurrencies];
     
@@ -74,12 +73,12 @@
 {
     if ([self.userInputTextField.text intValue] < 0) {
         
-        self.userInputTextField.text = [NSString stringWithFormat:@"%d", dollarTotal];
+        self.userInputTextField.text = [NSString stringWithFormat:@"%d", _dollarsTotal];
         return;
         
     }
     
-    dollarTotal = [self.userInputTextField.text intValue];
+    _dollarsTotal = [self.userInputTextField.text intValue];
     
     [self convertAllCurrencies];
 }
@@ -150,7 +149,7 @@
     
     float rate = [resultDictionary[currency] floatValue];
     
-    float resultFloat = dollarTotal * rate;
+    float resultFloat = _dollarsTotal * rate;
     
     NSNumberFormatter * formatter = [NSNumberFormatter new];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];

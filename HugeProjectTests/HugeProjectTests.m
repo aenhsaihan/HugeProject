@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ViewController.h"
 
 @interface HugeProjectTests : XCTestCase
 
@@ -26,9 +27,11 @@
     [super tearDown];
 }
 
-- (void)testExample
+-(void)testForZeroDollars
 {
-    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    ViewController *currencyConverter = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    
+    
 }
 
 @end

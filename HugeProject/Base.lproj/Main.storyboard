@@ -116,9 +116,9 @@
                         <color key="backgroundColor" red="0.13672414574287772" green="0.70671172631065526" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="currencyDecrementer" destination="gNk-xK-x7h" id="J2P-Kt-buq"/>
+                        <outlet property="currencyIncrementer" destination="RKW-UD-yLN" id="hlg-Xx-upw"/>
                         <outlet property="eurosNumberLabel" destination="Kxp-T5-isJ" id="jby-96-Xqr"/>
-                        <outlet property="previousCurrencyDecrementer" destination="gNk-xK-x7h" id="4nb-yZ-MzH"/>
-                        <outlet property="previousCurrencyIncrementer" destination="RKW-UD-yLN" id="jfb-ov-8dU"/>
                         <outlet property="realNumbersLabel" destination="q99-4z-jB1" id="Pfg-wp-yDs"/>
                         <outlet property="sterlingNumberLabel" destination="diP-dS-GIm" id="Dfc-ua-GTz"/>
                         <outlet property="userInputTextField" destination="mHb-vR-TWH" id="ZxD-mV-Qte"/>

@@ -13,6 +13,8 @@ _You can open up the Xcode project in Xcode 5, then run the build option in eith
 
 _How do I run the project's automated tests?_
 
+_On the left-hand side, you will see the navigator. From the tabbed icons, select the fifth icon which is the 'Test Navigator'. You will presented a target called 'HugeProjectTests'. If you hover over that, you will see a play button on appear. You can press this play button to run all the automated tests._
+
 ### Unit Tests
 
 1. `rake spec`

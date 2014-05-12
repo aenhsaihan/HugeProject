@@ -5,10 +5,9 @@ _Description: This project allows for the conversion of any number of US Dollars
 
 ## Project Setup
 
-_How do I, as a developer, start working on the project?_ 
+_How do I, as a developer, build the project?_ 
 
-1. _What dependencies does it have (where are they expressed) and how do I install them?_
-2. _How can I see the project working before I change anything?_
+_You can open up the Xcode project in Xcode 5, then run the build option in either a simulator or iOS device._
 
 ## Testing
 

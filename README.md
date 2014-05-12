@@ -23,9 +23,9 @@ _On the left-hand side, you will see the navigator. From the tabbed icons, selec
 
 ### _How to setup the deployment environment_
 
-- _Required heroku addons, packages, or chef recipes._
-- _Required environment variables or credentials not included in git._
-- _Monitoring services and logging._
+- _You must have an Apple Developer account with membership._
+- _You must procure a provisioning profile for any given iOS device, which can be set up at the Apple member center._
+
 
 ### _How to deploy_
 

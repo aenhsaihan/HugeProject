@@ -13,16 +13,11 @@ _You can open up the Xcode project in Xcode 5, then run the build option in eith
 
 _How do I run the project's automated tests?_
 
-_On the left-hand side, you will see the navigator. From the tabbed icons, select the fifth icon which is the 'Test Navigator'. You will presented a target called 'HugeProjectTests'. If you hover over that, you will see a play button on appear. You can press this play button to run all the automated tests._
+_On the left-hand side, you will see the navigator. From the tabbed icons, select the fifth icon which is the 'Test Navigator'. You will be presented a target called 'HugeProjectTests'. If you hover over that, you will see a play button on appear. You can press this play button to run all the automated tests._
 
 ### Unit Tests
 
-1. `rake spec`
-
-### Integration Tests
-
-1. _Run other local services / provide credentials for external services._
-2. `rake spec:integration`
+1. _testForZeroDollars_
 
 ## Deploying
 
@@ -44,13 +39,3 @@ _Examples of common tasks_
 > - How to monitor background jobs.
 > - How to run the app through a proxy.
 
-## Contributing changes
-
-- _Internal git workflow_
-- _Pull request guidelines_
-- _Tracker project_
-- _Google group_
-- _irc channel_
-- _"Please open github issues"_
-
-## License

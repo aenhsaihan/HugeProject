@@ -29,6 +29,8 @@ _On the left-hand side, you will see the navigator. From the tabbed icons, selec
 
 ### _How to deploy_
 
+_Once you have your iOS device and a proper provisioning file for it, you can click on the area where you normally choose a simulator to run your build. From there, you can choose your iOS device for deployment. You must make sure that your iOS device is connected to the computer, and that you have chosen to trust the computer from your iOS device._
+
 ## Troubleshooting & Useful Tools
 
 _Examples of common tasks_

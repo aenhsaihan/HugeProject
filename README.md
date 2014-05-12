@@ -3,6 +3,12 @@
 
 _Description: This project allows for the conversion of any number of US Dollars to UK Pound Sterling, European Union Euros, Japanese Yen, and Brazilian Reales_
 
+_Version: 1_
+_Date: May 12, 2014_
+_Contact: Anar Enhsaihan_
+_Email: aenhsaihan@gmail.com_
+_Phone: (646)355-8557_
+
 ## Project Setup
 
 _How do I, as a developer, build the project?_ 

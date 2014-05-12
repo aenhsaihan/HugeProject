@@ -1,7 +1,7 @@
 # _HugeProject_
 ===========
 
-_Description: What does this project do and who does it serve?_
+_Description: This project allows for the conversion of any number of US Dollars to UK Pound Sterling, European Union Euros, Japanese Yen, and Brazilian Reales_
 
 ## Project Setup
 

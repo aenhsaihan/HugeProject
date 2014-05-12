@@ -150,29 +150,36 @@
     
     float rate = [resultDictionary[currency] floatValue];
     
+    float resultFloat = dollarTotal * rate;
+    
+    NSNumberFormatter * formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:2]; // Set this if you need 2 digits
+    NSString *resultString =  [formatter stringFromNumber:[NSNumber numberWithFloat:resultFloat]];
+    
     if ([currency isEqualToString:@"EUR"]) {
 
         [self animateScrollingForLabel:self.eurosNumberLabel];
         
-        self.eurosNumberLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
+        self.eurosNumberLabel.text = resultString;
         
     } else if ([currency isEqualToString:@"GBP"]) {
         
         [self animateScrollingForLabel:self.sterlingNumberLabel];
         
-        self.sterlingNumberLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
+        self.sterlingNumberLabel.text = resultString;
         
     } else if ([currency isEqualToString:@"JPY"]) {
         
         [self animateScrollingForLabel:self.yenNumbersLabel];
         
-        self.yenNumbersLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
+        self.yenNumbersLabel.text = resultString;
         
     } else if ([currency isEqualToString:@"BRL"]) {
         
         [self animateScrollingForLabel:self.realNumbersLabel];
         
-        self.realNumbersLabel.text = [NSString stringWithFormat:@"%.02f", dollarTotal * rate];
+        self.realNumbersLabel.text = resultString;
         
     } else {
         

@@ -44,11 +44,5 @@ _Once you have your iOS device and a proper provisioning file for it, you can cl
 
 ## Troubleshooting & Useful Tools
 
-_Examples of common tasks_
-
-> e.g.
-> 
-> - How to make curl requests while authenticated via oauth.
-> - How to monitor background jobs.
-> - How to run the app through a proxy.
+_If you run into any problems, feel free to reach out to me._
 

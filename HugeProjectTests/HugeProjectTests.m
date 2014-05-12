@@ -31,6 +31,12 @@
 {
     ViewController *currencyConverter = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     
+    currencyConverter.dollarsTotal = 0;
+    
+    XCTAssertEqualObjects(currencyConverter.sterlingNumberLabel.text, NULL, @"Expected sterling label text to be 0");
+    XCTAssertEqualObjects(currencyConverter.eurosNumberLabel.text, NULL, @"Expected euros label text to be 0");
+    XCTAssertEqualObjects(currencyConverter.yenNumbersLabel.text, NULL, @"Expected yen label text to be 0");
+    XCTAssertEqualObjects(currencyConverter.realNumbersLabel.text, NULL, @"Expected real label text to be 0");
     
 }
 
